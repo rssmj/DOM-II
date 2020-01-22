@@ -4,101 +4,207 @@ docPage.addEventListener("click", () => {
 	docPage.style.opacity = "1";
 });
 docPage.addEventListener("dblclick", () => {
-	docPage.style.opacity = ".4";
+	docPage.style.opacity = ".5";
 });
-docPage.addEventListener("transitionstart", () => {
-	docPage.style.backgroundColor = "#17a2b8";
-	docPage.style.transform = "translateY(5rem)";
-	docPage.style.transition = "1s";
+docPage.addEventListener("click", () => {
+	docPage.animate(
+		{
+			opacity: ["(.5, .7)"],
+			backgroundColor: ["#17A2B8", "#ffffff"],
+			easing: ["ease-in-out"]
+		},
+		4000
+	);
+});
+
+docPage.addEventListener("dblclick", () => {
+	docPage.animate(
+		[{ transform: "translateX(0rem)" }, { transform: "translateY(8rem)" }],
+		{
+			duration: 4000
+		}
+	);
 });
 
 let mainHeader = document.querySelector(".main-navigation");
-mainHeader.addEventListener("transitionstart", () => {
-	mainHeader.style.transform = "scale(.9)";
-	mainHeader.style.transition = "3s";
-	mainHeader.style.backgroundColor = "fdfdfd";
+mainHeader.addEventListener("dblclick", () => {
+	mainHeader.animate(
+		[
+			{ transform: "scale(.9)" },
+			{ transform: "scale(1.1)" },
+			{ transform: "scale(1)" }
+		],
+		{
+			duration: 2000,
+			iterations: 1
+		}
+	);
 });
 
 //nav
 let mainNav = document.querySelector(".nav");
-mainNav.addEventListener("transitionstart", () => {
+mainNav.addEventListener("mousemove", () => {
 	mainNav.style.transform = "scale(1.3)";
 	mainNav.style.transition = "1s";
 });
 
 let funBus = document.querySelectorAll(".logo-heading").forEach(item => {
 	item.addEventListener("mouseover", () => {
-		item.style.transform = "scale(2.5)";
 		item.style.textTransform = "lowercase";
 		item.style.color = "#fcb856";
 		item.style.transition = ".6s";
 	});
 	item.addEventListener("mouseleave", () => {
-		item.style.transform = "scale(1.5)";
 		item.style.textTransform = "initial";
 		item.style.color = "#17a2b8";
 		item.style.transition = ".6s";
 	});
-	item.addEventListener("transitionstart", () => {
-		// item.style.color = "#17a2b8";
+	item.addEventListener("mousemove", () => {
+		gsap.to(".logo-heading", {
+			rotation: 360,
+			x: 175,
+			duration: 3,
+			ease: "elastic"
+		});
 	});
 
 	let navLinks = document.querySelectorAll(".nav-link");
 	navLinks.forEach(item => {
-		item.addEventListener("click", () => {
-			item.style.color = "#fcb856";
-			item.style.transform = "translateX(3rem)";
-			item.style.transition = ".8s";
+		item.addEventListener("mouseover", () => {
+			item.animate(
+				{
+					opacity: ["(.5, .7)"],
+					color: ["#ffebcd", "#17a2b8", "#ffffff", "#fcb856"]
+				},
+				3500
+			);
 		});
-		navLinks.forEach(item => {
-			item.addEventListener("mouseenter", () => {
-				item.style.color = "#17a2b8";
-				item.style.transform = "translateY(2.75rem)";
-				item.style.transition = ".8s";
+		item.addEventListener("mouseenter", () => {
+			item.animate(
+				[
+					{ transform: "scale(1.8)" },
+					{ transform: "scale(.9)" },
+					{ transform: "scale(1.4)" },
+					{ transform: "scale(1)" }
+				],
+				{
+					duration: 4000,
+					iterations: 1
+				}
+			);
+			item.addEventListener("click", () => {
+				item.animate(
+					[
+						{ transform: "scale(1.8)" },
+						{ transform: "scale(1.1)" },
+						{ transform: "scale(1)" },
+						{ transform: "translateY(2.5em)" },
+						{ transform: "translateX(2.5em)" },
+						{ transform: "scale(.7)" },
+						{ transform: "scale(1.09)" },
+						{ transform: "scale(1)" }
+					],
+					{
+						duration: 4000,
+						iterations: 1
+					}
+				);
 			});
 			navLinks.forEach(item => {
-				item.addEventListener("transitionstart", () => {});
-				navLinks.forEach(navLinks => {
-					navLinks.addEventListener("click", event => {
-						event.preventDefault();
-						event.stopPropagation();
-					});
+				item.addEventListener("click", event => {
+					event.preventDefault();
+					event.stopPropagation();
 				});
 			});
 		});
 	});
 
-	//img
-
-	let imgAll = document.querySelectorAll("img");
-	imgAll.forEach(item => {
-		item.addEventListener("mouseover", () => {
-			item.style.transform = "scale(1.125)";
-			item.style.transition = ".6s";
+	//text
+	let pText = document.querySelectorAll("p");
+	pText.forEach(p => {
+		p.addEventListener("mouseup", () => {
+			p.animate(
+				[
+					{ transform: "scale(1.5)" },
+					{ transform: "scale(.8)" },
+					{ transform: "scale(1.2)" },
+					{ transform: "scale(1)" }
+				],
+				{
+					duration: 1500,
+					iterations: 1
+				}
+			);
+		});
+		let hText = document.querySelectorAll("h2, h4");
+		hText.forEach(h => {
+			h.addEventListener("mousedown", () => {
+				h.animate(
+					[
+						{ transform: "scale(1.5)" },
+						{ transform: "scale(.8)" },
+						{ transform: "scale(1.2)" },
+						{ transform: "scale(1)" }
+					],
+					{
+						duration: 1500,
+						iterations: 1
+					}
+				);
+			});
 		});
 
+		//img
+		let busImg = document.querySelector(".intro img");
+		busImg.addEventListener("mouseover", () => {
+			gsap.fromTo(
+				".intro img",
+				{ scale: 0.1 },
+				{ scale: 1.5, duration: 1, ease: "expoScale(1, 1.5)", repeat: -1 }
+			);
+		});
+
+		let imgAll = document.querySelectorAll("img");
 		imgAll.forEach(item => {
-			item.addEventListener("mouseout", () => {
-				item.style.transform = "scale(1)";
-				item.style.transition = "1.2s";
+			item.addEventListener("mouseover", () => {
+				item.style.transform = "scale(1.125)";
+				item.style.transition = ".6s";
+			});
+
+			imgAll.forEach(item => {
+				item.addEventListener("mouseout", () => {
+					item.style.transform = "scale(1)";
+					item.style.transition = "1.2s";
+				});
 			});
 
 			//btn
-
 			let btnAll = document.querySelectorAll(".btn");
 			btnAll.forEach(item => {
-				item.addEventListener("click", () => {
-					item.style.transform = "rotate(360deg)";
-					item.style.transition = "1.5s";
-				});
 				item.addEventListener("mouseover", () => {
 					item.animate(
+						{
+							opacity: ["(0.2, .5)"],
+							backgroundColor: ["#ffebcd", "#17a2b8", "#ffffff", "#fcb856"],
+							color: ["#000000", "#ffffff", "#000000", "#ffffff"]
+						},
+						2500
+					);
+				});
+
+				item.addEventListener("click", () => {
+					item.animate(
 						[
-							{ transform: "translateX(0rem)" },
-							{ transform: "translateY(4rem)" }
+							{ transform: "scale(.8)" },
+							{ transform: "scale(1.1)" },
+							{ transform: "scale(1)" },
+							{ transform: "translateY(1.5em)" },
+							{ transform: "scale(.7)" },
+							{ transform: "scale(1.09)" },
+							{ transform: "scale(1)" }
 						],
 						{
-							duration: 1000,
+							duration: 2700,
 							iterations: 1
 						}
 					);
