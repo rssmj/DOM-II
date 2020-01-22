@@ -156,11 +156,11 @@ let funBus = document.querySelectorAll(".logo-heading").forEach(item => {
 
 		//img
 		let busImg = document.querySelector(".intro img");
-		busImg.addEventListener("mouseover", () => {
+		busImg.addEventListener("click", () => {
 			gsap.fromTo(
 				".intro img",
 				{ scale: 0.1 },
-				{ scale: 1.5, duration: 1, ease: "expoScale(1, 1.5)", repeat: -1 }
+				{ scale: 1.1, duration: 1, ease: "expoScale(1, 1.3)", repeat: 2 }
 			);
 		});
 
